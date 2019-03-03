@@ -8,7 +8,7 @@ namespace CleTourism.Models
     public class Activity
     {
         /// <summary>
-        /// Activity's ID
+        /// Activity's id
         /// </summary>
         public int Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace CleTourism.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Activity's neighborhood ID
+        /// Activity's neighborhood's id
         /// </summary>
         public int NeighborhoodId { get; set; }
 
