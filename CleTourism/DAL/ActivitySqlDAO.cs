@@ -34,7 +34,7 @@ namespace CleTourism.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM activities;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM activities", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -54,10 +54,42 @@ namespace CleTourism.DAL
             return activities;
         }
 
+        public Activity GetActivityDetails(int id)
+        {
+            Activity activity = new Activity();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM activities WHERE id = @id;", conn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        activity = ConvertReaderToActivity(reader);
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw;
+            }
+
+            return activity;
+        }
+
         private Activity ConvertReaderToActivity(SqlDataReader reader)
         {
             Activity activity = new Activity();
 
+            // TODO: change open/close datatypes in SQL & here?
             activity.Id = Convert.ToInt32(reader["id"]);
             activity.Name = Convert.ToString(reader["name"]);
             activity.NeighborhoodId = Convert.ToInt32(reader["neighborhood_id"]);
@@ -75,20 +107,21 @@ namespace CleTourism.DAL
             activity.AvgRating = Convert.ToInt32(reader["avg_rating"]);
             activity.RatingCount = Convert.ToInt32(reader["rating_count"]);
             activity.Image = Convert.ToString(reader["image"]);
-            activity.SunOpen = Convert.ToDateTime(reader["sun_open"]);
-            activity.SunClose = Convert.ToDateTime(reader["sun_close"]);
-            activity.MonOpen = Convert.ToDateTime(reader["mon_open"]);
-            activity.MonClose = Convert.ToDateTime(reader["mon_close"]);
-            activity.TuesOpen = Convert.ToDateTime(reader["tues_open"]);
-            activity.TuesClose = Convert.ToDateTime(reader["tues_close"]);
-            activity.WedOpen = Convert.ToDateTime(reader["wed_open"]);
-            activity.WedClose = Convert.ToDateTime(reader["wed_close"]);
-            activity.ThursOpen = Convert.ToDateTime(reader["thurs_open"]);
-            activity.ThursClose = Convert.ToDateTime(reader["thurs_close"]);
-            activity.FriOpen = Convert.ToDateTime(reader["fri_open"]);
-            activity.FriClose = Convert.ToDateTime(reader["fri_close"]);
-            activity.SatOpen = Convert.ToDateTime(reader["sat_open"]);
-            activity.SatClose = Convert.ToDateTime(reader["sat_close"]);
+            // TODO: maybe re-add daily times
+            //activity.SunOpen = Convert.ToDateTime(reader["sun_open"]);
+            //activity.SunClose = Convert.ToDateTime(reader["sun_close"]);
+            //activity.MonOpen = Convert.ToDateTime(reader["mon_open"]);
+            //activity.MonClose = Convert.ToDateTime(reader["mon_close"]);
+            //activity.TuesOpen = Convert.ToDateTime(reader["tues_open"]);
+            //activity.TuesClose = Convert.ToDateTime(reader["tues_close"]);
+            //activity.WedOpen = Convert.ToDateTime(reader["wed_open"]);
+            //activity.WedClose = Convert.ToDateTime(reader["wed_close"]);
+            //activity.ThursOpen = Convert.ToDateTime(reader["thurs_open"]);
+            //activity.ThursClose = Convert.ToDateTime(reader["thurs_close"]);
+            //activity.FriOpen = Convert.ToDateTime(reader["fri_open"]);
+            //activity.FriClose = Convert.ToDateTime(reader["fri_close"]);
+            //activity.SatOpen = Convert.ToDateTime(reader["sat_open"]);
+            //activity.SatClose = Convert.ToDateTime(reader["sat_close"]);
 
             return activity;
         }

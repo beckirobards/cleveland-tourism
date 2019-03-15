@@ -93,34 +93,41 @@ namespace CleTourism.Models
         public string Image { get; set; }
 
         /// <summary>
-        /// Activity's start and end times for each day of the week
+        /// List of all neighborhoods where activities take place
         /// </summary>
-        public DateTime SunOpen { get; set; }
+        public string NeighborhoodName { get; set; }
 
-        public DateTime SunClose { get; set; }
+        // TODO: maybe re-add daily times
 
-        public DateTime MonOpen { get; set; }
+        ///// <summary>
+        ///// Activity's start and end times for each day of the week
+        ///// </summary>
+        //public DateTime SunOpen { get; set; }
 
-        public DateTime MonClose { get; set; }
+        //public DateTime SunClose { get; set; }
 
-        public DateTime TuesOpen { get; set; }
+        //public DateTime MonOpen { get; set; }
 
-        public DateTime TuesClose { get; set; }
+        //public DateTime MonClose { get; set; }
 
-        public DateTime WedOpen { get; set; }
+        //public DateTime TuesOpen { get; set; }
 
-        public DateTime WedClose { get; set; }
+        //public DateTime TuesClose { get; set; }
 
-        public DateTime ThursOpen { get; set; }
+        //public DateTime WedOpen { get; set; }
 
-        public DateTime ThursClose { get; set; }
+        //public DateTime WedClose { get; set; }
 
-        public DateTime FriOpen { get; set; }
+        //public DateTime ThursOpen { get; set; }
 
-        public DateTime FriClose { get; set; }
+        //public DateTime ThursClose { get; set; }
 
-        public DateTime SatOpen { get; set; }
+        //public DateTime FriOpen { get; set; }
 
-        public DateTime SatClose { get; set; }
+        //public DateTime FriClose { get; set; }
+
+        //public DateTime SatOpen { get; set; }
+
+        //public DateTime SatClose { get; set; }
     }
 }

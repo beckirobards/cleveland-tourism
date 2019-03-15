@@ -35,3 +35,11 @@ body {
         display: none;
     }
 }
+
+.activity-index-image {
+    width: 450px;
+}
+
+.activity-detail-image {
+    width: 450px;
+}

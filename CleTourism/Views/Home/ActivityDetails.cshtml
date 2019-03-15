@@ -1,0 +1,22 @@
+﻿@model Activity
+@{
+    ViewData["Title"] = "ActivityDetails";
+}
+
+<h2>@Model.Name</h2>
+
+
+    <img class="activity-detail-image" src="@Model.Image" />
+<p>@Model.NeighborhoodName</p>
+<p>@Model.AddressNumber @Model.StreetName</p>
+@if (Model.Address2 != null)
+{
+    <p>@Model.Address2</p>
+}
+<p>@Model.City, @Model.State @Model.ZipCode</p>
+<p>@Model.Description</p>
+<p>@Model.Website</p>
+<p>@Model.Phone</p>
+<p>@Model.PriceRange (price range)</p>
+<p>Visitors typically spend about @Model.AvgLength minutes here</p>
+<p>@Model.AvgRating stars (@Model.RatingCount reviews)</p>

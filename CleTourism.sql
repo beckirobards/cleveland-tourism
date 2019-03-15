@@ -54,20 +54,20 @@ CREATE TABLE activities
 	avg_rating		int				not null default(0),
 	rating_count	int				not null default(0),
 	image			varchar(200),
-	sun_open		time,
-	sun_close		time,
-	mon_open		time,
-	mon_close		time,
-	tues_open		time,
-	tues_close		time,
-	wed_open		time,
-	wed_close		time,
-	thurs_open		time,
-	thurs_close		time,
-	fri_open		time,
-	fri_close		time,
-	sat_open		time,
-	sat_close		time,
+	--sun_open		time,
+	--sun_close		time,
+	--mon_open		time,
+	--mon_close		time,
+	--tues_open		time,
+	--tues_close		time,
+	--wed_open		time,
+	--wed_close		time,
+	--thurs_open		time,
+	--thurs_close		time,
+	--fri_open		time,
+	--fri_close		time,
+	--sat_open		time,
+	--sat_close		time,
 
 	constraint		pk_activities				primary key		(id),
 	constraint		fk_activities_neighborhoods	foreign key		(neighborhood_id) references neighborhoods (id)
@@ -98,17 +98,48 @@ CREATE TABLE activities_categories
 );
 
 INSERT INTO neighborhoods(name) VALUES ('Ohio City');
+INSERT INTO neighborhoods(name) VALUES ('University Circle');
+INSERT INTO neighborhoods(name) VALUES ('Downtown');
 INSERT INTO categories(name) VALUES ('Bar');
+INSERT INTO categories(name) VALUES ('Arts & Culture');
 INSERT INTO activities(name,neighborhood_id,address_number,street_name,city,state,zip_code,
-website,phone,price_range,description,avg_length,image,sun_open,sun_close,mon_open,mon_close,
-tues_open,tues_close,wed_open,wed_close,thurs_open,thurs_close,fri_open,fri_close,sat_open,sat_close)
+website,phone,price_range,description,avg_length,image
+--,sun_open,sun_close,mon_open,mon_close,
+--tues_open,tues_close,wed_open,wed_close,thurs_open,thurs_close,fri_open,fri_close,sat_open,sat_close
+)
 VALUES('Great Lakes Brewing Company',(SELECT id FROM neighborhoods WHERE name='Ohio City'),2516,
 'Market Ave','Cleveland','OH','44113','https://www.greatlakesbrewing.com/','2167714404',2,'The first brewpub 
 and microbrewery in the state of Ohio, Great Lakes Brewing has been noted as important to Cleveland''s local 
 identity and as one of the initial forces behind the revival of the Ohio City neighborhood on the near West 
-Side.',75,'https://www.greatlakesbrewing.com/sites/default/files/dortmunder-fixed_2.png','11:00:00','23:00:00',
-'11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00',
-'11:00:00','23:00:00');
+Side.',75,'https://125beers.files.wordpress.com/2014/02/great-lakes-brewing-company.png'
+--,'11:00:00','23:00:00',
+--'11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00',
+--'11:00:00','23:00:00'
+);
+INSERT INTO activities(name,neighborhood_id,address_number,street_name,city,state,zip_code,
+website,phone,price_range,description,avg_length,image
+--,sun_open,sun_close,mon_open,mon_close,
+--tues_open,tues_close,wed_open,wed_close,thurs_open,thurs_close,fri_open,fri_close,sat_open,sat_close
+)
+VALUES('Cleveland Museum of Art',(SELECT id FROM neighborhoods WHERE name='University Circle'),123,
+'Wade Oval','Cleveland','OH','44118','https://www.clevelandmuseumofart.com','2165554404',1,'One of the best 
+art collections in the country!',90,'https://media1.fdncms.com/clevescene/imager/u/original/4889999/cma.jpg'
+--,
+--'11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00',
+--'11:00:00','23:00:00','11:00:00','23:00:00'
+);
+INSERT INTO activities(name,neighborhood_id,address_number,street_name,city,state,zip_code,
+website,phone,price_range,description,avg_length,image
+--,sun_open,sun_close,mon_open,mon_close,
+--tues_open,tues_close,wed_open,wed_close,thurs_open,thurs_close,fri_open,fri_close,sat_open,sat_close
+)
+VALUES('Rock & Roll Hall of Fame',(SELECT id FROM neighborhoods WHERE name='Downtown'),123,
+'W. 9th St','Cleveland','OH','44114','https://www.rockhall.com','2165554405',2,'The heart of rock ''n roll.',
+90,'http://cdn.mntm.me/fa/25/7d/The_Rock_and_Roll_Hall_of_Fame_and_Museum_sign-Cleveland-Ohio-fa257d25449643d5b46051d02fb6d88b_c.jpg'
+--,
+--'11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00','11:00:00','23:00:00',
+--'11:00:00','23:00:00','11:00:00','23:00:00'
+);
 INSERT INTO reviews(first_name,last_name,activity_id,rating,review) VALUES ('Leslie','Knope',(SELECT id FROM 
 activities WHERE name='Great Lakes Brewing Company'),5,'10/10 would recommend');
 
