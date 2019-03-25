@@ -7,36 +7,36 @@ using CleTourism.Models;
 
 namespace CleTourism.DAL
 {
-    public class NeighborhoodSqlDAO : INeighborhoodDAO
+    public class CategorySqlDAO : ICategoryDAO
     {
         private string connectionString;
-        Neighborhood neighborhood = new Neighborhood();
+        Category category = new Category();
 
         /// <summary>
         /// Creates new DAO
         /// </summary>
         /// <param name="connectionString">DAO's connection string</param>
-        public NeighborhoodSqlDAO(string connectionString)
+        public CategorySqlDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
 
-        public IList<Neighborhood> GetAllNeighborhoods()
+        public IList<Category> GetAllCategories()
         {
-            IList<Neighborhood> neighborhoods = new List<Neighborhood>();
+            IList<Category> categories = new List<Category>();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM neighborhoods", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM categories", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Neighborhood neighborhood = ConvertReaderToNeighborhood(reader);
-                        neighborhoods.Add(neighborhood);
+                        Category category = ConvertReaderToCategory(reader);
+                        categories.Add(category);
                     }
                 }
             }
@@ -46,12 +46,12 @@ namespace CleTourism.DAL
                 throw;
             }
 
-            return neighborhoods;
+            return categories;
         }
 
-        public Neighborhood GetNeighborhood(int id)
+        public IList<Category> GetCategory(int id)
         {
-            Neighborhood neighborhood = new Neighborhood();
+            IList<Category> categories = new List<Category>();
 
             try
             {
@@ -59,14 +59,15 @@ namespace CleTourism.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM neighborhoods WHERE id = @id;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM categories WHERE id = @id;", conn);
                     cmd.Parameters.AddWithValue("@id", id);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        neighborhood = ConvertReaderToNeighborhood(reader);
+                        category = ConvertReaderToCategory(reader);
+                        categories.Add(category);
                     }
                 }
             }
@@ -76,16 +77,15 @@ namespace CleTourism.DAL
                 throw;
             }
 
-            return neighborhood;
+            return categories;
         }
 
-        private Neighborhood ConvertReaderToNeighborhood(SqlDataReader reader)
+        private Category ConvertReaderToCategory(SqlDataReader reader)
         {
-            Neighborhood neighborhood = new Neighborhood();
-            neighborhood.Id = Convert.ToInt32(reader["id"]);
-            neighborhood.Name = Convert.ToString(reader["name"]);
-
-            return neighborhood;
+            Category category = new Category();
+            category.Id = Convert.ToInt32(reader["id"]);
+            category.Name = Convert.ToString(reader["name"]);
+            return category;
         }
     }
 }

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace CleTourism.DAL
 {
-    public interface INeighborhoodDAO
+    public interface ICategoryDAO
     {
         /// <summary>
         /// Returns a list of all neighborhoods in the database
         /// </summary>
         /// <returns></returns>
-        IList<Neighborhood> GetAllNeighborhoods();
+        IList<Category> GetAllCategories();
 
         /// <summary>
-        /// Based on a given activity ID, returns the activity's neighborhood
+        /// Based on a given category ID, returns the activity's categories
         /// </summary>
         /// <returns></returns>
-        Neighborhood GetNeighborhood(int id);
+        IList<Category> GetCategory(int id);
     }
 }

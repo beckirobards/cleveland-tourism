@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Search";
+    IList<Neighborhood> neighborhoods = (IList<Neighborhood>)ViewData["neighborhoods"];
+}
+
+@model ActivitySearch
+
+<h2>Search</h2>
+
+<form method="get" asp-controller="activity" asp-action="searchresult">
+    <label asp-for="Neighborhood">Neighborhood</label>
+    <select asp-for="Neighborhood">
+        @foreach (Neighborhood neighborhood in neighborhoods)
+        {
+            <option value="@neighborhood.Name">@neighborhood.Name</option>
+        }
+    </select>
+
+
+    @*<label asp-for="Category"></label>
+    <input asp-for="Category" placeholder="e.g. Ohio" />*@
+
+    <input type="submit" value="Search" />
+</form>

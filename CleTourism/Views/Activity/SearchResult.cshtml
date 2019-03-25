@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+
+@model ActivitySearch
+
+<p>Results in the @Model.Neighborhood neighborhood:</p>
+
+@foreach (Activity activity in Model.ActivityResults)
+{
+    <div class="activity-overview">
+        <a asp-controller="activity" asp-action="activitydetails" asp-route-id="@activity.Id">
+            <h4 class="activity-index-name">@activity.Name</h4>
+        </a>
+        <a asp-controller="activity" asp-action="activitydetails" asp-route-id="@activity.Id">
+            <img class="activity-index-image" src="@activity.Image" />
+        </a>
+        <p>@activity.NeighborhoodName</p>
+        <p>@activity.AddressNumber @activity.StreetName</p>
+        @if (activity.Address2 != null)
+        {
+            <p>@activity.Address2</p>
+        }
+        <p>@activity.City, @activity.State @activity.ZipCode</p>
+        <p>@activity.Website</p>
+        <p>@activity.Phone</p>
+        <p>@activity.PriceRange (price range)</p>
+        <p>Visitors typically spend about @activity.AvgLength minutes here</p>
+        <p>@activity.AvgRating stars (@activity.RatingCount reviews)</p>
+    </div>
+}

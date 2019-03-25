@@ -15,6 +15,13 @@ namespace CleTourism.DAL
         IList<Activity> GetAllActivities();
 
         /// <summary>
+        /// Returns all activities within a given neighborhood
+        /// </summary>
+        /// <param name="neighborhood"></param>
+        /// <returns></returns>
+        IList<Activity> GetAllActivities(string neighborhood);
+
+        /// <summary>
         /// Returns all details about a specific activity
         /// </summary>
         /// <param name="id"></param>

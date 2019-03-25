@@ -54,6 +54,38 @@ namespace CleTourism.DAL
             return activities;
         }
 
+        public IList<Activity> GetAllActivities(string neighborhood)
+        {
+            List<Activity> activities = new List<Activity>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT activities.*, neighborhoods.name 
+                                     FROM activities JOIN neighborhoods ON activities.neighborhood_id = neighborhoods.id
+                                     WHERE neighborhoods.name = @neighborhood", conn);
+                    cmd.Parameters.AddWithValue("@neighborhood", neighborhood);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Activity activity = ConvertReaderToActivity(reader);
+                        activities.Add(activity);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // TODO: log?
+                throw;
+            }
+
+            return activities;
+        }
+
         public Activity GetActivityDetails(int id)
         {
             Activity activity = new Activity();
@@ -107,21 +139,6 @@ namespace CleTourism.DAL
             activity.AvgRating = Convert.ToInt32(reader["avg_rating"]);
             activity.RatingCount = Convert.ToInt32(reader["rating_count"]);
             activity.Image = Convert.ToString(reader["image"]);
-            // TODO: maybe re-add daily times
-            //activity.SunOpen = Convert.ToDateTime(reader["sun_open"]);
-            //activity.SunClose = Convert.ToDateTime(reader["sun_close"]);
-            //activity.MonOpen = Convert.ToDateTime(reader["mon_open"]);
-            //activity.MonClose = Convert.ToDateTime(reader["mon_close"]);
-            //activity.TuesOpen = Convert.ToDateTime(reader["tues_open"]);
-            //activity.TuesClose = Convert.ToDateTime(reader["tues_close"]);
-            //activity.WedOpen = Convert.ToDateTime(reader["wed_open"]);
-            //activity.WedClose = Convert.ToDateTime(reader["wed_close"]);
-            //activity.ThursOpen = Convert.ToDateTime(reader["thurs_open"]);
-            //activity.ThursClose = Convert.ToDateTime(reader["thurs_close"]);
-            //activity.FriOpen = Convert.ToDateTime(reader["fri_open"]);
-            //activity.FriClose = Convert.ToDateTime(reader["fri_close"]);
-            //activity.SatOpen = Convert.ToDateTime(reader["sat_open"]);
-            //activity.SatClose = Convert.ToDateTime(reader["sat_close"]);
 
             return activity;
         }
